@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#0b1e2d">
+    <title>NBA 2K Style Girl Rating - Full Team Mode</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="arena-background">
+        <div class="light-streaks"></div>
+        <div class="particles"></div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1 class="neon-title">NBA 2K STYLE GIRL RATING</h1>
+            <p class="instruction-text">
+                Build your team of up to 20 girls. Rate each girl, optionally apply Cap Breakers, 
+                and choose whether to save or discard her. Manage your starting 5 lineup for maximum team strength!
+            </p>
+        </header>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Left Section: Input Form -->
+            <div class="input-section">
+                <h2>Create New Girl</h2>
+                <form id="girlForm">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" placeholder="Enter her name" required>
+                    </div>
+
+                    <h3>Base Stats</h3>
+                    <div class="stats-grid">
+                        <div class="form-group">
+                            <label for="face">Face (0-15)</label>
+                            <input type="number" id="face" min="0" max="15" value="0" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="eyes">Eyes (0-5)</label>
+                            <input type="number" id="eyes" min="0" max="5" value="0" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="hair">Hair (0-5)</label>
+                            <input type="number" id="hair" min="0" max="5" value="0" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="top">Top (0-5)</label>
+                            <input type="number" id="top" min="0" max="5" value="0" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="bottom">Bottom (0-5)</label>
+                            <input type="number" id="bottom" min="0" max="5" value="0" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="fitness">Fitness (0-15)</label>
+                            <input type="number" id="fitness" min="0" max="15" value="0" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="history">History (0-10)</label>
+                            <input type="number" id="history" min="0" max="10" value="0" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="personality">Personality (0-20)</label>
+                            <input type="number" id="personality" min="0" max="20" value="0" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="tolerance">Tolerance (0-10)</label>
+                            <input type="number" id="tolerance" min="0" max="10" value="0" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="substances">Drinking/Smoking/Drugs (0-10)</label>
+                            <input type="number" id="substances" min="0" max="10" value="0" required>
+                        </div>
+                    </div>
+
+                    <h3>Cap Breakers (Optional Bonus)</h3>
+                    <div class="stats-grid">
+                        <div class="form-group cap-breaker">
+                            <label for="athletic">Athletic/Build (0-2)</label>
+                            <input type="number" id="athletic" min="0" max="2" value="0">
+                        </div>
+                        <div class="form-group cap-breaker">
+                            <label for="height">Height (0-1)</label>
+                            <input type="number" id="height" min="0" max="1" value="0">
+                        </div>
+                        <div class="form-group cap-breaker">
+                            <label for="attractiveness">Attractiveness (0-2)</label>
+                            <input type="number" id="attractiveness" min="0" max="2" value="0">
+                        </div>
+                        <div class="form-group cap-breaker">
+                            <label for="intoYou">Into You (0-1)</label>
+                            <input type="number" id="intoYou" min="0" max="1" value="0">
+                        </div>
+                        <div class="form-group cap-breaker">
+                            <label for="comfort">Comfort (0-2)</label>
+                            <input type="number" id="comfort" min="0" max="2" value="0">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Calculate Overall</button>
+                </form>
+            </div>
+
+            <!-- Middle Section: Girl Card Display -->
+            <div class="card-section">
+                <h2>Girl Card</h2>
+                <div id="cardDisplay" class="card-placeholder">
+                    <p>Create a girl to see her card</p>
+                </div>
+
+                <div id="cardActions" class="card-actions" style="display: none;">
+                    <button id="saveBtn" class="btn btn-save">Save to Roster</button>
+                    <button id="deleteBtn" class="btn btn-delete">Delete / Discard</button>
+                </div>
+            </div>
+
+            <!-- Right Section: Roster Panel -->
+            <div class="roster-section">
+                <h2>Team Roster (<span id="rosterCount">0</span>/20)</h2>
+                
+                <div class="starting-five-container">
+                    <h3>Starting 5</h3>
+                    <div class="mobile-instruction" style="display: none;">
+                        Tap a bench player, then tap an empty slot to add them
+                    </div>
+                    <div id="startingFive" class="starting-five">
+                        <div class="empty-slot" data-position="0">Empty Slot 1</div>
+                        <div class="empty-slot" data-position="1">Empty Slot 2</div>
+                        <div class="empty-slot" data-position="2">Empty Slot 3</div>
+                        <div class="empty-slot" data-position="3">Empty Slot 4</div>
+                        <div class="empty-slot" data-position="4">Empty Slot 5</div>
+                    </div>
+                </div>
+
+                <div class="bench-container">
+                    <h3>Bench</h3>
+                    <div id="bench" class="bench">
+                        <p class="empty-message">No bench players yet</p>
+                    </div>
+                </div>
+
+                <div class="team-stats">
+                    <h3>Team Stats</h3>
+                    <div id="teamStats">
+                        <p><strong>Starting 5 Average:</strong> <span id="avgOverall">-</span></p>
+                        <p><strong>Highest Tier:</strong> <span id="highestTier">-</span></p>
+                        <p><strong>Total Cap Breakers:</strong> <span id="totalCapBreakers">0</span></p>
+                        <p><strong>Galaxy Opal/Diamond Count:</strong> <span id="topTierCount">0</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
